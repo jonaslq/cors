@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CORS test</title>
+  </head>
+  <body>
+Test CORS
+<button id="fetchdata">BUTTON</button>
+<div id="result"></div>
+<script>
+    const fetchDataBtn = document.querySelector("#fetchdata");
+    const result = document.querySelector("#result");
+    
+    // gets data from API and sets the content of #result div
+    async function getData() {
+      result.innerText = "Loading....";
+      try {
+        const res = await fetch("http://localhost:8001/file.json");
+        const jsonResult = await res.json();
+        result.innerText = JSON.stringify(jsonResult, null, 2);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    // add event listener for #fetchdata button
+    fetchDataBtn.addEventListener("click", getData);
+      
+</script>
+</body>
+</html>
